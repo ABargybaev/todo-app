@@ -33,3 +33,18 @@ def test_add_todo(client):
 def test_add_todo_without_title(client):
     response = client.post("/todos", json={})
     assert response.status_code == 400
+
+def test_second_todo_gets_id_2(client):
+    response1 = client.post(
+        "/todos",
+        json={"title": "First task"}
+    )
+
+    response2 = client.post(
+        "/todos",
+        json={"title": "Second task"}
+    )
+
+    assert response1.status_code == 201
+    assert response2.status_code == 201
+    assert response2.get_json()["id"] == 2
