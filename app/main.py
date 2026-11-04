@@ -7,7 +7,7 @@ todos = []
 
 @app.get("/health")
 def health():
-    return jsonify(status="ok")
+    return jsonify(status="OK")
 
 
 @app.get("/todos")
@@ -25,6 +25,9 @@ def add_todo():
     todos.append(todo)
     return jsonify(todo), 201
 
-
+@app.get("/deploy-proof")
+def deploy_proof():
+    return jsonify(version="ci-gate-demo-1")
+    
 if __name__ == "__main__":
     app.run(host="0.0.0.0", port=5000)
